@@ -25,7 +25,7 @@ with closing(socket.socket(socket.AF_INET, socket.SOCK_DGRAM)) as sock:
 
     while True:
         ret, frame = cap.read()
-        ret, encoded = cv2.imencode(".jpg", frame, (cv2.IMWRITE_JPEG_QUALITY, 10))#とりあえずUDP一発で送れるように1フレームを64kb以下にする＝低画質にする
+        ret, encoded = cv2.imencode(".jpg", frame, (cv2.IMWRITE_JPEG_QUALITY, 12,cv2.IMWRITE_JPEG_OPTIMIZE,1))#とりあえずUDP一発で送れるように1フレームを64kb以下にする＝低画質にする
         print(encoded.shape)
         sock.sendto(encoded.tobytes(), (multicast_group, port))
 
